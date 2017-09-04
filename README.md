@@ -3,13 +3,12 @@ This project contains a [Tensorflow](http://tensorflow.org/) trained model that 
 
 How to obtain the checkpoint file?
 ===================
-`git clone https://github.com/USCDataScience/img2text.git`
-
-`cd img2text`
-
-`sudo chmod a+x download-1M_iters_ckpt.sh`
-
-`./download-1M_iters_ckpt.sh`
+```
+git clone https://github.com/USCDataScience/img2text.git
+cd img2text
+sudo chmod a+x download-1M_iters_ckpt.sh
+./download-1M_iters_ckpt.sh
+```
 
 Questions, comments?
 ===================
