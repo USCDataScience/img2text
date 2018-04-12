@@ -1,0 +1,4 @@
+flying objects
+glowing orbs
+lights
+spheres
