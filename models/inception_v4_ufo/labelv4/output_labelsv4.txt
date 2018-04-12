@@ -1,0 +1,5 @@
+dust
+flare
+plane
+bird
+ufo
