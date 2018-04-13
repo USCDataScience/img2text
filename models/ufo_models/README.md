@@ -59,6 +59,9 @@ triangle 0.00829932
 The tika-dockers repo contains the InceptionRestDockerFile that holds the current training model namely Inception V4.
 The Path to inception_v4.ckpt & meta files needs to be replaced with the custom paths to our retrained model.ckpt and meta files.
 
+**Performance**
+The resultant model has good performance with respect to the accuracy of detecting the UFO objects specifically emphasizing and utilizing the shape characteristic of the UFO sightings from the aggregated dataset.
+
 
 **Testing results on a generic image from Google(input: Triangle-shaped UFO ):**
 Source URL:.dailymail.co.uk/i/pix/2017/12/04/14/46FA2D2B00000578-0-image-a-103_1512399265747.jpg
