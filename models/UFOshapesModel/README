@@ -1,0 +1,46 @@
+Retraining Tensorflow model(trained using Inception V3 on ImageNet) using images of UFO objects of different shapes
+
+- models/UFOshapesModel/ contsains
+1. model checkpoint files to be used by img2txt - ufo_shapes_retrain_checkpoint.data-00000-of-00001
+2. model freeze graph to directly classify the images - UFO_shape_classification_model.pb
+3. labels of the retrained model -  UFO_trained_shape_labels.txt
+
+- Using the checkpoint file in Tika Image Captioning Docker
+Reference : https://wiki.apache.org/tika/ImageCaption
+
+- To integerate with tika-dockers, clone tika-dockers (https://github.com/USCDataScience/tika-dockers.git) 
+and modify Im2txtRestDockerfile to use the retrained model checkpoint file in place of its original model checkpoint
+
+- After these commands in the file Im2txtRestDockerfile
+	RUN echo "We're downloading the checkpoint file for image captioning, the shell might look unresponsive. Please be patient."  && \
+	    # To get rid of early EOF error
+	    git config --global http.postBuffer 1048576000 && \
+	    git clone https://github.com/USCDataScience/img2text.git && \
+	    # Join the parts
+	    cat img2text/models/1M_iters_ckpt_parts_* >1M_iters_ckpt.tar.gz && \
+	    tar -xzvf 1M_iters_ckpt.tar.gz && rm -rf 1M_iters_ckpt.tar.gz
+
+- Add the following, in order to replace the model checkpoint with the retrained model checkpoint
+RUN curl -O <path_to_new_model_in_this_repository>/ufo_shapes_retrain_checkpoint.data-00000-of-00001
+RUN pwd
+RUN rm 1M_iters_ckpt/checkpoint
+RUN rm 1M_iters_ckpt/model.ckpt-1000000.data-00000-of-00001
+RUN rm 1M_iters_ckpt/model.ckpt-1000000.index
+RUN rm 1M_iters_ckpt/model.ckpt-1000000.meta
+RUN mv ufo_shapes_retrain_checkpoint.data-00000-of-00001 1M_iters_ckpt/model.ckpt-1000000
+RUN ls 1M_iters_ckpt/*
+
+- Classification of images into different labels 
+curl -LO https://github.com/tensorflow/tensorflow/raw/master/tensorflow/examples/label_image/label_image.py
+python label_image.py \
+--graph=<path_of_output_graph.pb_in_this_repository> --labels=<path_of_output_labels.txt_in_this_repository> \
+--input_layer=Placeholder \
+--output_layer=final_result \
+--image=<input_image_path_in_this_repository>
+
+
+
+
+
+
+
