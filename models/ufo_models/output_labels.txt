@@ -1,0 +1,12 @@
+blimp
+cigar
+circle
+cylinder
+disc
+fireball
+oval
+saturn like
+sphere
+square
+star like
+triangle
