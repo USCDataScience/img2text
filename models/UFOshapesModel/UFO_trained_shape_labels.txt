@@ -1,0 +1,4 @@
+chevron
+cigar
+disc
+light
