@@ -1,0 +1,4 @@
+bright
+diagrams
+faint
+nolight
